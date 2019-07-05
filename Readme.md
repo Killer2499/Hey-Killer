@@ -1,6 +1,6 @@
 <h1>Hey Killer!<h1>
 
-Hey Killer! is a windows virtual assistant.
+Hey Killer! is a windows virtual assistant
 
 Progress: Developing State<br><br>
 Areas Covering: Machine Learning,Deep Learning,Image Processing,Natural Language Processing</p>
