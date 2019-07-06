@@ -148,4 +148,4 @@ def assistant(command):
 #while(True):
 #    assistant(my_command())
 
-assistant("Hey Killer open facebook.com for me")
+assistant("Hey Killer launch painter")
