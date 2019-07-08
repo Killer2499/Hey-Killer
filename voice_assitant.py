@@ -97,7 +97,7 @@ def assistant(command):
             #response('What should I say to him?')
             #content = myCommand()
             #recipient=recipient_name+'@gmail.com'
-            content='hey'
+            content=raw_input("Body of Email:")
             if email_provider=='gmail':
                 mail = smtplib.SMTP('smtp.gmail.com', 587)
                 login_email_id='sanathsingavarapu265@gmail.com'
@@ -139,6 +139,17 @@ def assistant(command):
                 if template_option=="letter":
                     letter()
 
+
+    #Recognizer
+    elif 'recognizer' in command:
+        recognize_type=raw_input("Recognizer Type:")
+        if recognize_type=="image" or recognize_type=="photo":
+            pass
+        elif recognize_type=="video":
+            pass
+            
+        
+
     #Launch System Application
     elif 'launch' in command:
         reg_ex = re.search('launch (.*)', command)
@@ -147,7 +158,6 @@ def assistant(command):
             appname = reg_ex.group(1)
             launch_application(appname)
             response('I have launched the desired application')
-
     
 
     #Open Website        
@@ -165,7 +175,8 @@ def assistant(command):
    
     
 
-#while(True):
-#    assistant(my_command())
+while(True):
+    my_command=raw_input("Command:")
+    assistant(my_command)
 
-assistant("Hey Killer launch Automated office")
+#assistant("Hey Killer launch Automated office")
