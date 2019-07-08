@@ -1,8 +1,8 @@
 import pandas as pd
 import os
 import difflib
-system_apps=pd.read_csv('Data\Extensions_CSV.csv')
-
+import sys
+system_apps=pd.read_csv('Applications\Data\Extensions_Csv.csv')
 installed_apps_path=(os.popen("where *.exe").read().split("\n"))
 installed_apps=[]
 
@@ -20,13 +20,13 @@ for i in range(0,len(installed_apps)):
 installed_apps_dataframe=pd.DataFrame()
 installed_apps_dataframe['Application']=installed_apps_names
 installed_apps_dataframe['Actual Extension']=installed_apps_extensions
-installed_apps_dataframe.to_csv('Data\Installed_Apps.csv')
+installed_apps_dataframe.to_csv('Applications\Data\Installed_Apps.csv')
 
 all_applications=pd.concat([system_apps,installed_apps_dataframe])
 #all_applications.to_excel("Data\applications.xlsx")
 
 def launch_application(application):
-    path="Data"
+    path="Applications\Data"
     all_applications=pd.read_excel(path+'\Applications.xlsx')
     print(all_applications.shape)
     application=application.lower()
@@ -55,7 +55,7 @@ def launch_application(application):
         print("Do You mean "+ all_applications['Application'][index_value]+"?")
         answer=raw_input("Response:")
         answer=answer.lower()
-        if  'yes'or'yeah'or'correct' in answer:
+        if  answer=='yes' or answer=='yeah' or answer=="correct":
             os.popen("start "+ app_final)
         else:
             print("Sorry Then Couldn't find anything with the name")

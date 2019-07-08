@@ -24,10 +24,10 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
 from time import strftime
-#import contractions
-#import inflect
-#import re, string, unicodedata
+sys.path.append('Applications/')
 from applications import launch_application
+sys.path.append('Automated Office/Templates/Word/')
+from letter_template import letter
 #nltk.download('stopwords')
 #nltk.download('wordnet')
 #nltk.download('punkt')
@@ -79,8 +79,9 @@ def stemming_text(text):
 
 def assistant(command):
     command=remove_stopwords(command)
-    command=lemmatization_text(command)
-    command=stemming_text(command)
+    #command=lemmatization_text(command)
+    #command=stemming_text(command)
+    command=command.lower()
     print (command)
 
    
@@ -120,6 +121,24 @@ def assistant(command):
         else:
             response('I don\'t know what you mean!')
 
+
+
+    #Automated Office
+    elif 'automated office' in command:
+        app_type=raw_input("Which Application:")
+        app_type=app_type.lower()
+        if app_type=="word" or app_type=="Microsoft Word":
+            option=raw_input("Build or Use Templates:")
+            option=option.lower()
+            if 'build' in option:
+                pass
+            elif 'template' or 'templates' in option:
+                print("Template Types \n 1.Letter")
+                template_option=raw_input("Template Type:")
+                template_option=template_option.lower()
+                if template_option=="letter":
+                    letter()
+
     #Launch System Application
     elif 'launch' in command:
         reg_ex = re.search('launch (.*)', command)
@@ -142,10 +161,11 @@ def assistant(command):
             response('The website you have requested has been opened for you .')
         else:
             pass
-        
+
+   
     
 
 #while(True):
 #    assistant(my_command())
 
-assistant("Hey Killer launch painter")
+assistant("Hey Killer launch Automated office")
