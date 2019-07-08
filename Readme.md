@@ -12,5 +12,6 @@ Implemented:
   <li>Command "send mail":Sends an email to recepients of different emailproviders(Gmail,Yahoo,outlook).</li>
   <li>Command "launch": Launches Installed Applications. </li>
   <li>Command "open": Opens any website.</li>
+  <li><Command "automated office": Can Create PowerPoint,Word and Excel Files just by inputting Data either using Default Templates or creating your own templates.</li>
 <ul>
 
