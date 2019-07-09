@@ -30,7 +30,7 @@ def cv():
     heading_font=heading_styles.font
     heading_font.color.rgb=RGBColor(247,93,93)
     heading_font.bold=True
-    heading_font.size=Pt(15)
+    heading_font.size=Pt(16)
     heading_font.name='Segoe UI Historic'
 
     
@@ -67,6 +67,10 @@ def cv():
         company_info=raw_input("Company Name")
         experience=document.add_paragraph()
         company=experience.add_run(company_info)
+        company_font=company.font
+        company_font.bold=True
+        company_font.size=Pt(14)
+        company_font.name='Segoe UI Historic'
         
         spacing = experience.add_run()
         spacing.add_break(WD_BREAK.LINE)
