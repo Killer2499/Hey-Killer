@@ -30,7 +30,7 @@ def cv():
     heading_font=heading_styles.font
     heading_font.color.rgb=RGBColor(247,93,93)
     heading_font.bold=True
-    heading_font.size=Pt(16)
+    heading_font.size=Pt(17)
     heading_font.name='Segoe UI Historic'
 
     
@@ -64,12 +64,12 @@ def cv():
         if (experience_count==0):
             experience_header=document.add_paragraph().add_run("Experience",style="HeadingStyle")
     
-        company_info=raw_input("Company Name")
+        company_info=raw_input("Company Name:")
         experience=document.add_paragraph()
         company=experience.add_run(company_info)
         company_font=company.font
         company_font.bold=True
-        company_font.size=Pt(14)
+        company_font.size=Pt(15)
         company_font.name='Segoe UI Historic'
         
         spacing = experience.add_run()
@@ -92,6 +92,67 @@ def cv():
             else:
                 pass
     add_experience(0)
+
+    print ("---Education---")
+
+    def add_education(education_count):
+        if (education_count==0):
+            education_header=document.add_paragraph().add_run("Education",style="HeadingStyle")
+    
+        college_info=raw_input("College Name:")
+        education=document.add_paragraph()
+        college=education.add_run(college_info)
+        college_font=college.font
+        college_font.bold=True
+        college_font.size=Pt(15)
+        college_font.name='Segoe UI Historic'
+        
+        
+        spacing = education.add_run()
+        spacing.add_break(WD_BREAK.LINE)
+        
+        time_period_info=raw_input("Time Period:")
+        time_period=education.add_run(time_period_info)
+
+        education_count+=1
+        if(education_count>=1):
+            option=raw_input("Wanna Add More(y/n):")
+            if option=='y' or option=='yes':
+                add_education(1)
+            else:
+                pass
+    add_education(0)
+
+    #document.add_page_break()
+    
+    print ("---Awards---")
+
+    def add_awards(award_count):
+        if (award_count==0):
+            award_header=document.add_paragraph().add_run("Awards",style="HeadingStyle")
+    
+        competition_info=raw_input("Competition Name:")
+        winning_info=raw_input("Position:")
+
+        
+        awards=document.add_paragraph()
+        competition=awards.add_run(competition_info +" : " +winning_info)
+        competition_font=competition.font
+        competition_font.size=Pt(15)
+        competition_font.name='Segoe UI Historic'
+        
+        spacing = awards.add_run()
+        spacing.add_break(WD_BREAK.LINE)W
+
+        award_count+=1
+        if(award_count>=1):
+            option=raw_input("Wanna Add More(y/n):")
+            if option=='y' or option=='yes':
+                add_awards(1)
+            else:
+                pass
+    add_awards(0)
+
     document.save('cv.docx')
 
 
