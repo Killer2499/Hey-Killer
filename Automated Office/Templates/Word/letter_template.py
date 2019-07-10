@@ -121,8 +121,8 @@ def letter():
     document.add_page_break()
 
     #Saving Document
-    #location=raw_input("Save Document as")
-    location="C:\Users\Sanath\Desktop\Hey Killer!\Automated Office\Templates\Word\Sample_Letter.docx"
+    location=raw_input("Save Document as")
+    #location="C:\Users\Sanath\Desktop\Hey Killer!\Automated Office\Templates\Word\Sample_Letter.docx"
     document.save(location)
 
 

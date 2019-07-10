@@ -190,7 +190,8 @@ def cv():
                 pass
     add_awards(0)
 
-    document.save('Sample_CV.docx')
+    location=raw_input("Location:")
+    document.save(location)
 
 
 
