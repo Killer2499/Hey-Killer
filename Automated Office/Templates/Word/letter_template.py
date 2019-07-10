@@ -1,7 +1,7 @@
 from docx import Document
 from docx.shared import Inches
 from datetime import date
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH,WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.text import WD_LINE_SPACING
 from docx.shared import Pt
@@ -44,12 +44,15 @@ def letter():
     #from_title_name.add_run(from_name, style = 'CommentsStyle').bold = True
     #from_title_name.bold=True
     #from_title_name.alignment =1 #0-L ,1-C, 2-R
-
+    
+    
     from_address=document.add_paragraph(data,style='ParagraphStyle')
     from_address.name = 'Times New Roman'
     from_address.size = Pt(14)
     #from_address.alignment =1
-
+   
+    spacing = from_address.add_run()
+    spacing.add_break(WD_BREAK.LINE)
 
     #Date
     date_today=str(date.today())
@@ -57,9 +60,10 @@ def letter():
     month=int(date_today.split('-')[1])
     day=int(date_today.split('-')[2])
     date_words=date(day=day, month=month, year=year).strftime('%d %B %Y')
-    document.add_paragraph(date_words,style='ParagraphStyle')
+    letter_date=document.add_paragraph(date_words,style='ParagraphStyle')
 
-
+    spacing = letter_date.add_run()
+    spacing.add_break(WD_BREAK.LINE)
 
     #To Address
     to_input=raw_input("To address:")
@@ -74,6 +78,9 @@ def letter():
 
     to_address=document.add_paragraph(data,style='ParagraphStyle')
 
+    spacing = to_address.add_run()
+    spacing.add_break(WD_BREAK.LINE)
+
     #Greetings
     greeting_input=raw_input("Greetings:")
     greetings=document.add_paragraph(greeting_input,style='ParagraphStyle')
@@ -82,7 +89,10 @@ def letter():
     body_input=raw_input("Body of the Letter:")
     body_input=body_input.split('<new_paragraph>')
     for i in range(0,len(body_input)):
-        document.add_paragraph(body_input[i],style='ParagraphStyle')
+        body=document.add_paragraph(body_input[i],style='ParagraphStyle')
+
+    spacing = body.add_run()
+    spacing.add_break(WD_BREAK.LINE)
 
     #Closing
     closing_input=raw_input("Closing Greeting:")
@@ -116,5 +126,5 @@ def letter():
     document.save(location)
 
 
-
+letter()
 

@@ -46,20 +46,22 @@ def cv():
     email='sanathsingavarapu99@gmail.com'
     phone='+91-8919142764'
 
-    contact_info="Email: "+email+", Mobile: "+phone
+    contact_info="Email: "+email+" | Telephone: "+phone
     contact=document.add_paragraph(contact_info,style='ParagraphStyle')
 
     spacing = contact.add_run()
     spacing.add_break(WD_BREAK.LINE)
 
-    
+    #statement_info=raw_input("Personal Statement:")
+    statement_info='A committed,knowledgeable and capable Reasearch Fellow.Highly experienced in project and team management, strategic planning and budget management. A confident presenter able to impart complex information to audiences of all levels.'
+    statement_header=document.add_paragraph().add_run("Personal Statement",style="HeadingStyle")    
+    statement=document.add_paragraph(statement_info,style='ParagraphStyle')
 
-    #skills_info=raw_input("Skills:")
+    #skills_info=raw_input(" Technical Skills:")
     skills_info='Html,Css,Js,Jquery,Php,Mysql,T-sql,U-sql,Python,C,C++,Bootstrap,PL/SQL,NO-SQL,Power Bi,Azure Data Factory,Azure Data Bricks,React Native,React Js,Arduino,Raspberry Pi,Adobe Photoshop'
-    skills_header=document.add_paragraph().add_run("Skills",style="HeadingStyle")
+    skills_header=document.add_paragraph().add_run("Technical Skills",style="HeadingStyle")
     skills=document.add_paragraph(skills_info,style='ParagraphStyle')
 
-    
     def add_experience(experience_count):
         if (experience_count==0):
             experience_header=document.add_paragraph().add_run("Experience",style="HeadingStyle")
@@ -123,7 +125,39 @@ def cv():
                 pass
     add_education(0)
 
-    #document.add_page_break()
+    document.add_page_break()
+
+    print ("---Project---")
+
+    def add_project(project_count):
+        if (project_count==0):
+            project_header=document.add_paragraph().add_run("Projects",style="HeadingStyle")
+    
+        project_title_info=raw_input("Project Name:")
+        project_details_info=raw_input("Project Details:")
+
+        
+        projects=document.add_paragraph()
+        project_title=projects.add_run(project_title_info)
+        project_title_font=project_title.font
+        project_title_font.size=Pt(12)
+        project_title_font.bold=True
+        project_title_font.name='Segoe UI Historic'
+
+        project_details=projects.add_run(" : " +project_details_info)
+        project_details_font=project_details.font
+        project_details_font.size=Pt(12)
+        project_details_font.name='Segoe UI Historic'
+
+        project_count+=1
+        if(project_count>=1):
+            option=raw_input("Wanna Add More(y/n):")
+            if option=='y' or option=='yes':
+                add_project(1)
+            else:
+                pass
+    add_project(0)
+    
     
     print ("---Awards---")
 
@@ -136,13 +170,16 @@ def cv():
 
         
         awards=document.add_paragraph()
-        competition=awards.add_run(competition_info +" : " +winning_info)
+        competition=awards.add_run(competition_info)
         competition_font=competition.font
-        competition_font.size=Pt(15)
+        competition_font.size=Pt(12)
+        competition_font.bold=True
         competition_font.name='Segoe UI Historic'
-        
-        spacing = awards.add_run()
-        spacing.add_break(WD_BREAK.LINE)W
+
+        winning=awards.add_run(" : " +winning_info)
+        winning_font=winning.font
+        winning_font.size=Pt(12)
+        winning_font.name='Segoe UI Historic'
 
         award_count+=1
         if(award_count>=1):
@@ -153,7 +190,7 @@ def cv():
                 pass
     add_awards(0)
 
-    document.save('cv.docx')
+    document.save('Sample_CV.docx')
 
 
 
