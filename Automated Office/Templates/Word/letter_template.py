@@ -17,7 +17,7 @@ def letter():
     paragraph_font.name = 'Times New Roman'
 
     #From Address
-    from_input=raw_input("From address:")
+    from_input=input("From address:")
     from_split=from_input.split(',')
 
     data=''
@@ -28,7 +28,7 @@ def letter():
             data=data+from_split[i]+",\n"
 
 
-    #from_input=raw_input("From address:")
+    #from_input=input("From address:")
 
     #from_split=from_input.split(',')
     #from_name=from_split[0]
@@ -66,7 +66,7 @@ def letter():
     spacing.add_break(WD_BREAK.LINE)
 
     #To Address
-    to_input=raw_input("To address:")
+    to_input=input("To address:")
     to_split=to_input.split(',')
 
     data=''
@@ -82,11 +82,11 @@ def letter():
     spacing.add_break(WD_BREAK.LINE)
 
     #Greetings
-    greeting_input=raw_input("Greetings:")
+    greeting_input=input("Greetings:")
     greetings=document.add_paragraph(greeting_input,style='ParagraphStyle')
 
     #Body
-    body_input=raw_input("Body of the Letter:")
+    body_input=input("Body of the Letter:")
     body_input=body_input.split('<new_paragraph>')
     for i in range(0,len(body_input)):
         body=document.add_paragraph(body_input[i],style='ParagraphStyle')
@@ -95,20 +95,20 @@ def letter():
     spacing.add_break(WD_BREAK.LINE)
 
     #Closing
-    closing_input=raw_input("Closing Greeting:")
+    closing_input=input("Closing Greeting:")
     closing=document.add_paragraph(closing_input,style='ParagraphStyle')
 
 
     #Signature
-    signature_image_option=raw_input("Wanna Add Signature Image(Yes/No):")
+    signature_image_option=input("Wanna Add Signature Image(Yes/No):")
     if(signature_image_option=='Yes' or signature_image_option=='yes'):
-        signature_image_path=raw_input("Image Path:")
+        signature_image_path=input("Image Path:")
         document.add_picture(signature_image_path,width=Inches(2),height=Inches(1))
     else:
         pass
 
     #Name and Designation
-    designation_details=raw_input("Name and Designation:")
+    designation_details=input("Name and Designation:")
     designation_details=designation_details.split(',')
     data=''
     for i in range(0,len(designation_details)):
@@ -121,7 +121,7 @@ def letter():
     document.add_page_break()
 
     #Saving Document
-    location=raw_input("Save Document as")
+    location=input("Save Document as")
     #location="C:\Users\Sanath\Desktop\Hey Killer!\Automated Office\Templates\Word\Sample_Letter.docx"
     document.save(location)
 

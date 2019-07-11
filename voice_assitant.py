@@ -9,14 +9,14 @@ import smtplib
 import requests
 import subprocess
 from pyowm import OWM
-import youtube_dl
+#import youtube_dl
 #import python-vlc
-import urllib
-import urllib2
-import json
-from bs4 import BeautifulSoup as soup
-from urllib2 import urlopen
-import wikipedia
+#import urllib
+#import urllib2
+#import json
+#from bs4 import BeautifulSoup as soup
+#from urllib2 import urlopen
+#import wikipedia
 import random
 import nltk
 from nltk.corpus import stopwords
@@ -27,7 +27,8 @@ from time import strftime
 sys.path.append('Applications/')
 from applications import launch_application
 sys.path.append('Automated Office/Templates/Word/')
-from letter_template import letter
+from speak import say
+#from letter_template import letter
 #nltk.download('stopwords')
 #nltk.download('wordnet')
 #nltk.download('punkt')
@@ -36,12 +37,12 @@ lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english')) 
 
 def my_command():
-    
+    print("Here")
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print('Say something...')
-        r.pause_threshold = 1
-        r.adjust_for_ambient_noise(source, duration=1)
+        r.pause_threshold = 0.5
+        r.adjust_for_ambient_noise(source, duration=0.5)
         audio = r.listen(source)
     try:
         command = r.recognize_google(audio).lower()
@@ -50,13 +51,12 @@ def my_command():
     except sr.UnknownValueError:
 
         print('Sorry Couldnot Understand Please Try Again')
-        command = myCommand();
+        command = my_command();
     return command
 
 def response(audio):
     print(audio)
-    for line in audio.splitlines():
-              os.system("say"+audio)
+    say(audio)
               
 
 def remove_stopwords(text):
@@ -65,39 +65,22 @@ def remove_stopwords(text):
   filtered_sentence = ' '.join(w for w in word_tokens if not w in stop_words )
   return filtered_sentence
 
-def lemmatization_text(text):
-  
-  word_tokens = word_tokenize(text) 
-  filtered_sentence=(' '.join([lemmatizer.lemmatize(word) for word in word_tokens]))
-  return filtered_sentence
-
-def stemming_text(text):
-  
-  word_tokens = word_tokenize(text) 
-  filtered_sentence=(' '.join([stemmer.stem(word) for word in word_tokens]))
-  return filtered_sentence
-
 def assistant(command):
     command=remove_stopwords(command)
-    #command=lemmatization_text(command)
-    #command=stemming_text(command)
     command=command.lower()
     print (command)
 
-   
-
-
     #Email Section
     if 'send mail' in command:
-        email_provider=raw_input("Who's is the email Provider?")
+        #email_provider=input("Who's is the email Provider?")
         response('Who is the recipient?')
-        #recipient = myCommand()
-        recipient=raw_input(str("Recipient:"))
+        #recipient = my_command()
+        recipient=input(str("Recipient:"))
         if recipient:
             #response('What should I say to him?')
-            #content = myCommand()
+            #content = my_command()
             #recipient=recipient_name+'@gmail.com'
-            content=raw_input("Body of Email:")
+            content=input("Body of Email:")
             if email_provider=='gmail':
                 mail = smtplib.SMTP('smtp.gmail.com', 587)
                 login_email_id='sanathsingavarapu265@gmail.com'
@@ -125,24 +108,24 @@ def assistant(command):
 
     #Automated Office
     elif 'automated office' in command:
-        app_type=raw_input("Which Application:")
+        #app_type=input("Which Application:")
         app_type=app_type.lower()
         if app_type=="word" or app_type=="Microsoft Word":
-            option=raw_input("Build or Use Templates:")
+            option=input("Build or Use Templates:")
             option=option.lower()
             if 'build' in option:
                 pass
             elif 'template' or 'templates' in option:
                 print("Template Types \n 1.Letter")
-                template_option=raw_input("Template Type:")
+                #template_option=input("Template Type:")
                 template_option=template_option.lower()
                 if template_option=="letter":
-                    letter()
-
+                    #letter()
+                    pass
 
     #Recognizer
     elif 'recognizer' in command:
-        recognize_type=raw_input("Recognizer Type:")
+        #recognize_type=input("Recognizer Type:")
         if recognize_type=="image" or recognize_type=="photo":
             pass
         elif recognize_type=="video":
@@ -176,7 +159,5 @@ def assistant(command):
     
 
 while(True):
-    my_command=raw_input("Command:")
-    assistant(my_command)
+    assistant(my_command())
 
-#assistant("Hey Killer launch Automated office")

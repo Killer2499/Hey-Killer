@@ -34,15 +34,15 @@ def cv():
     heading_font.name='Segoe UI Historic'
 
     
-    #name=raw_input("Name:")
+    #name=input("Name:")
     name='Sanath Singavarapu'
     name_title=document.add_paragraph()
     name_title=name_title.add_run(name,style="TitleStyle")
     name_title.size=Pt(40)
 
    
-    #email=raw_input("Email:")
-    #phone=raw_input("Phone:")
+    #email=input("Email:")
+    #phone=input("Phone:")
     email='sanathsingavarapu99@gmail.com'
     phone='+91-8919142764'
 
@@ -52,12 +52,12 @@ def cv():
     spacing = contact.add_run()
     spacing.add_break(WD_BREAK.LINE)
 
-    #statement_info=raw_input("Personal Statement:")
+    #statement_info=input("Personal Statement:")
     statement_info='A committed,knowledgeable and capable Reasearch Fellow.Highly experienced in project and team management, strategic planning and budget management. A confident presenter able to impart complex information to audiences of all levels.'
     statement_header=document.add_paragraph().add_run("Personal Statement",style="HeadingStyle")    
     statement=document.add_paragraph(statement_info,style='ParagraphStyle')
 
-    #skills_info=raw_input(" Technical Skills:")
+    #skills_info=input(" Technical Skills:")
     skills_info='Html,Css,Js,Jquery,Php,Mysql,T-sql,U-sql,Python,C,C++,Bootstrap,PL/SQL,NO-SQL,Power Bi,Azure Data Factory,Azure Data Bricks,React Native,React Js,Arduino,Raspberry Pi,Adobe Photoshop'
     skills_header=document.add_paragraph().add_run("Technical Skills",style="HeadingStyle")
     skills=document.add_paragraph(skills_info,style='ParagraphStyle')
@@ -66,7 +66,7 @@ def cv():
         if (experience_count==0):
             experience_header=document.add_paragraph().add_run("Experience",style="HeadingStyle")
     
-        company_info=raw_input("Company Name:")
+        company_info=input("Company Name:")
         experience=document.add_paragraph()
         company=experience.add_run(company_info)
         company_font=company.font
@@ -77,18 +77,18 @@ def cv():
         spacing = experience.add_run()
         spacing.add_break(WD_BREAK.LINE)
         
-        role_info=raw_input("Role:")
+        role_info=input("Role:")
         role=experience.add_run(role_info)
         
         spacing = experience.add_run()
         spacing.add_break(WD_BREAK.LINE)
         
-        time_period_info=raw_input("Time Period:")
+        time_period_info=input("Time Period:")
         time_period=experience.add_run(time_period_info)
 
         experience_count+=1
         if(experience_count>=1):
-            option=raw_input("Wanna Add More(y/n):")
+            option=input("Wanna Add More(y/n):")
             if option=='y' or option=='yes':
                 add_experience(1)
             else:
@@ -101,7 +101,7 @@ def cv():
         if (education_count==0):
             education_header=document.add_paragraph().add_run("Education",style="HeadingStyle")
     
-        college_info=raw_input("College Name:")
+        college_info=input("College Name:")
         education=document.add_paragraph()
         college=education.add_run(college_info)
         college_font=college.font
@@ -113,12 +113,12 @@ def cv():
         spacing = education.add_run()
         spacing.add_break(WD_BREAK.LINE)
         
-        time_period_info=raw_input("Time Period:")
+        time_period_info=input("Time Period:")
         time_period=education.add_run(time_period_info)
 
         education_count+=1
         if(education_count>=1):
-            option=raw_input("Wanna Add More(y/n):")
+            option=input("Wanna Add More(y/n):")
             if option=='y' or option=='yes':
                 add_education(1)
             else:
@@ -133,8 +133,8 @@ def cv():
         if (project_count==0):
             project_header=document.add_paragraph().add_run("Projects",style="HeadingStyle")
     
-        project_title_info=raw_input("Project Name:")
-        project_details_info=raw_input("Project Details:")
+        project_title_info=input("Project Name:")
+        project_details_info=input("Project Details:")
 
         
         projects=document.add_paragraph()
@@ -151,7 +151,7 @@ def cv():
 
         project_count+=1
         if(project_count>=1):
-            option=raw_input("Wanna Add More(y/n):")
+            option=input("Wanna Add More(y/n):")
             if option=='y' or option=='yes':
                 add_project(1)
             else:
@@ -165,8 +165,8 @@ def cv():
         if (award_count==0):
             award_header=document.add_paragraph().add_run("Awards",style="HeadingStyle")
     
-        competition_info=raw_input("Competition Name:")
-        winning_info=raw_input("Position:")
+        competition_info=input("Competition Name:")
+        winning_info=input("Position:")
 
         
         awards=document.add_paragraph()
@@ -183,14 +183,14 @@ def cv():
 
         award_count+=1
         if(award_count>=1):
-            option=raw_input("Wanna Add More(y/n):")
+            option=input("Wanna Add More(y/n):")
             if option=='y' or option=='yes':
                 add_awards(1)
             else:
                 pass
     add_awards(0)
 
-    location=raw_input("Location:")
+    location=input("Location:")
     document.save(location)
 
 
