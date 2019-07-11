@@ -7,6 +7,9 @@ from docx.enum.style import WD_STYLE
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.text import WD_LINE_SPACING
 from docx.shared import Pt
+import sys
+sys.path.append('../../../')
+from speak import say
   
 def cv():
     document = Document()
@@ -33,30 +36,35 @@ def cv():
     heading_font.size=Pt(17)
     heading_font.name='Segoe UI Historic'
 
-    
-    #name=input("Name:")
-    name='Sanath Singavarapu'
+    say("What's your name")
+    name=input("Name:")
+    #name='Sanath Singavarapu'
     name_title=document.add_paragraph()
     name_title=name_title.add_run(name,style="TitleStyle")
     name_title.size=Pt(40)
 
+    
+    say("Hey"+name.split(' ')[0]+"What's your Email")   
+    email=input("Email:")
+    say("Can I have ur Number:")
+    phone=input("Phone:")
+    #email='sanathsingavarapu99@gmail.com'
+    #phone='+91-8919142764'
    
-    #email=input("Email:")
-    #phone=input("Phone:")
-    email='sanathsingavarapu99@gmail.com'
-    phone='+91-8919142764'
-
+    
     contact_info="Email: "+email+" | Telephone: "+phone
     contact=document.add_paragraph(contact_info,style='ParagraphStyle')
 
     spacing = contact.add_run()
     spacing.add_break(WD_BREAK.LINE)
 
-    #statement_info=input("Personal Statement:")
-    statement_info='A committed,knowledgeable and capable Reasearch Fellow.Highly experienced in project and team management, strategic planning and budget management. A confident presenter able to impart complex information to audiences of all levels.'
+    say("State your Personal Statement")
+    statement_info=input("Personal Statement:")
+    #statement_info='A committed,knowledgeable and capable Reasearch Fellow.Highly experienced in project and team management, strategic planning and budget management. A confident presenter able to impart complex information to audiences of all levels.'
     statement_header=document.add_paragraph().add_run("Personal Statement",style="HeadingStyle")    
     statement=document.add_paragraph(statement_info,style='ParagraphStyle')
 
+    say("List your Technical Skills")
     #skills_info=input(" Technical Skills:")
     skills_info='Html,Css,Js,Jquery,Php,Mysql,T-sql,U-sql,Python,C,C++,Bootstrap,PL/SQL,NO-SQL,Power Bi,Azure Data Factory,Azure Data Bricks,React Native,React Js,Arduino,Raspberry Pi,Adobe Photoshop'
     skills_header=document.add_paragraph().add_run("Technical Skills",style="HeadingStyle")
@@ -65,7 +73,8 @@ def cv():
     def add_experience(experience_count):
         if (experience_count==0):
             experience_header=document.add_paragraph().add_run("Experience",style="HeadingStyle")
-    
+
+        say("Name of the Company")
         company_info=input("Company Name:")
         experience=document.add_paragraph()
         company=experience.add_run(company_info)
@@ -76,18 +85,21 @@ def cv():
         
         spacing = experience.add_run()
         spacing.add_break(WD_BREAK.LINE)
-        
+
+        say("Your Role in the company")
         role_info=input("Role:")
         role=experience.add_run(role_info)
         
         spacing = experience.add_run()
         spacing.add_break(WD_BREAK.LINE)
-        
+
+        say("How long")
         time_period_info=input("Time Period:")
         time_period=experience.add_run(time_period_info)
 
         experience_count+=1
         if(experience_count>=1):
+            say("Wanna Add one more")
             option=input("Wanna Add More(y/n):")
             if option=='y' or option=='yes':
                 add_experience(1)
@@ -100,7 +112,9 @@ def cv():
     def add_education(education_count):
         if (education_count==0):
             education_header=document.add_paragraph().add_run("Education",style="HeadingStyle")
-    
+
+        
+        say("College's name")
         college_info=input("College Name:")
         education=document.add_paragraph()
         college=education.add_run(college_info)
@@ -112,12 +126,15 @@ def cv():
         
         spacing = education.add_run()
         spacing.add_break(WD_BREAK.LINE)
-        
+
+        say("Time Period")
         time_period_info=input("Time Period:")
         time_period=education.add_run(time_period_info)
 
         education_count+=1
         if(education_count>=1):
+            
+            say("Want to Add more")  
             option=input("Wanna Add More(y/n):")
             if option=='y' or option=='yes':
                 add_education(1)
@@ -132,7 +149,8 @@ def cv():
     def add_project(project_count):
         if (project_count==0):
             project_header=document.add_paragraph().add_run("Projects",style="HeadingStyle")
-    
+
+        say("Enter Project Name and Details")
         project_title_info=input("Project Name:")
         project_details_info=input("Project Details:")
 
@@ -164,7 +182,8 @@ def cv():
     def add_awards(award_count):
         if (award_count==0):
             award_header=document.add_paragraph().add_run("Awards",style="HeadingStyle")
-    
+
+        say("Mention about your awards")
         competition_info=input("Competition Name:")
         winning_info=input("Position:")
 
@@ -190,9 +209,10 @@ def cv():
                 pass
     add_awards(0)
 
+    say("Where Should I save this")
     location=input("Location:")
     document.save(location)
 
-
+cv()
 
 cv()

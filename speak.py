@@ -3,7 +3,7 @@ from pygame import mixer
 from tempfile import TemporaryFile
 
 
-def say(text, lang='es'):
+def say(text, lang='en'):
     try:
         tts = gTTS(text=text, lang=lang)
         mixer.init()

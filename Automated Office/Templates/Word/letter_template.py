@@ -5,7 +5,9 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH,WD_BREAK
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.text import WD_LINE_SPACING
 from docx.shared import Pt
-
+import sys
+sys.path.append('../../../')
+from speak import say
 
 def letter():
     document=Document()
@@ -16,6 +18,7 @@ def letter():
     paragraph_font.size = Pt(12)
     paragraph_font.name = 'Times New Roman'
 
+    say("Enter from address:")
     #From Address
     from_input=input("From address:")
     from_split=from_input.split(',')
@@ -65,6 +68,7 @@ def letter():
     spacing = letter_date.add_run()
     spacing.add_break(WD_BREAK.LINE)
 
+    say("To whom should I send the letter")
     #To Address
     to_input=input("To address:")
     to_split=to_input.split(',')
@@ -82,10 +86,12 @@ def letter():
     spacing.add_break(WD_BREAK.LINE)
 
     #Greetings
+    say("Give your Greetings")
     greeting_input=input("Greetings:")
     greetings=document.add_paragraph(greeting_input,style='ParagraphStyle')
 
     #Body
+    say("Enter the content of the letter")
     body_input=input("Body of the Letter:")
     body_input=body_input.split('<new_paragraph>')
     for i in range(0,len(body_input)):
@@ -95,11 +101,13 @@ def letter():
     spacing.add_break(WD_BREAK.LINE)
 
     #Closing
+    say("Closing Greetings")
     closing_input=input("Closing Greeting:")
     closing=document.add_paragraph(closing_input,style='ParagraphStyle')
 
 
     #Signature
+    say("Wanna Add your Signature")
     signature_image_option=input("Wanna Add Signature Image(Yes/No):")
     if(signature_image_option=='Yes' or signature_image_option=='yes'):
         signature_image_path=input("Image Path:")
@@ -108,6 +116,7 @@ def letter():
         pass
 
     #Name and Designation
+    say("Name and Designation")
     designation_details=input("Name and Designation:")
     designation_details=designation_details.split(',')
     data=''
@@ -121,6 +130,7 @@ def letter():
     document.add_page_break()
 
     #Saving Document
+    say("Where should I save this")
     location=input("Save Document as")
     #location="C:\Users\Sanath\Desktop\Hey Killer!\Automated Office\Templates\Word\Sample_Letter.docx"
     document.save(location)
