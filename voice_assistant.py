@@ -24,10 +24,13 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
 from time import strftime
+sys.path.append('Email/')
+from send_mail import mail
 sys.path.append('Applications/')
 from applications import launch_application
 sys.path.append('Automated Office/Templates/Word/')
 from speak import say
+sys.path.append('Face Recognition/')
 #nltk.download('stopwords')
 #nltk.download('wordnet')
 #nltk.download('punkt')
@@ -65,49 +68,17 @@ def remove_stopwords(text):
   return filtered_sentence
 
 def assistant(command):
+    #initial_command=command
     command=remove_stopwords(command)
     command=command.lower()
     print (command)
-
+    
     #Email Section
     if 'send mail' in command:
-        #email_provider=input("Who's is the email Provider?")
-        say('Which Networks Email do you use')
-        email_provider=my_command()
-        say('To which address should i send the mail')
-        #recipient = my_command()
-        recipient=input(str("Recipient:"))
-        if recipient:
-            #response('What should I say to him?')
-            #content = my_command()
-            #recipient=recipient_name+'@gmail.com'
-            say("What's the matter?")
-            #content=input("Body of Email:")
-            content=my_command()
-            if email_provider=='gmail':
-                mail = smtplib.SMTP('smtp.gmail.com', 587)
-                login_email_id='sanathsingavarapu265@gmail.com'
-                login_email_password='sanath99'
-            elif email_provider =='outlook':
-                mail = smtplib.SMTP('smtp-mail.outlook.com',587)
-                login_email_id=''
-                login_email_password=''
-            elif email_provider=='yahoo':
-                mail=smtplib.SMTP('smtp.mail.yahoo.com',587)
-                login_email_id=''
-                login_email_password=''
-            else:
-                print("Sorry I didn't get you")
-            mail.ehlo()
-            mail.starttls()
-            mail.login(login_email_id, login_email_password)
-            mail.sendmail(login_email_id, recipient, content)
-            mail.close()
-            response('Email has been sent successfuly. You can check your inbox.')
-        else:
-            response('I don\'t know what you mean!')
-
-
+       
+        send_mail()
+   
+    
 
     #Automated Office
     elif 'automated office' in command:
@@ -139,17 +110,19 @@ def assistant(command):
                 elif template_option=="cv" or template_option=="resume":
                     from cv_template import cv
                     cv()
-        
-
+            
     #Recognizer
+    
     elif 'recognizer' in command:
         #recognize_type=input("Recognizer Type:")
+        say("Choose Either Image or Live Stream")
+        recognize_type=my_command()
         if recognize_type=="image" or recognize_type=="photo":
-            pass
+            from image import recognize_image
+            recognize_image()
         elif recognize_type=="video":
-            pass
-            
-        
+            from video import recognize_video
+            recognize_video()
 
     #Launch System Application
     elif 'launch' in command:
@@ -169,13 +142,14 @@ def assistant(command):
             print(domain)
             url = 'https://www.' + domain
             webbrowser.open(url)
-            response('The website you have requested has been opened for you .')
+            response('The website you have requested has been opened.')
         else:
             pass
 
    
-    
 
 while(True):
     assistant(my_command())
+
+#assistant('launch paint ')
 

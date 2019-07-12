@@ -25,4 +25,3 @@ pip install sklearn
 pip install gtts
 pip install pypiwin32
 pip install xlrd
-pip install difflib

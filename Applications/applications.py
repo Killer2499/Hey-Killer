@@ -53,7 +53,7 @@ def launch_application(application):
         index_value=predictions.index(max(predictions))
         app_final=all_applications['Actual Extension'][index_value]
         print("Do You mean "+ all_applications['Application'][index_value]+"?")
-        answer=raw_input("Response:")
+        answer=input("Response:")
         answer=answer.lower()
         if  answer=='yes' or answer=='yeah' or answer=="correct":
             os.popen("start "+ app_final)
