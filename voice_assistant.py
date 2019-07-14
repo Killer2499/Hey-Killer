@@ -17,6 +17,8 @@ import subprocess
 #from bs4 import BeautifulSoup as soup
 #from urllib2 import urlopen
 #import wikipedia
+import aiml
+from autocorrect import spell
 import random
 import nltk
 from nltk.corpus import stopwords
@@ -36,7 +38,11 @@ sys.path.append('Face Recognition/')
 #nltk.download('punkt')
 stemmer = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
-stop_words = set(stopwords.words('english')) 
+stop_words = set(stopwords.words('english'))
+BRAIN_FILE="aiml_pretrained_model.dump"
+
+k = aiml.Kernel()
+k.loadBrain(BRAIN_FILE)
 
 say("Hey Dude, This is Killer.Your Personal Assistant")
 def my_command():
@@ -66,20 +72,17 @@ def remove_stopwords(text):
   word_tokens = word_tokenize(text) 
   filtered_sentence = ' '.join(w for w in word_tokens if not w in stop_words )
   return filtered_sentence
-
+print("This is Killer, Your Personal Assistant")
 def assistant(command):
     #initial_command=command
-    command=remove_stopwords(command)
+    #command=remove_stopwords(command)
     command=command.lower()
-    print (command)
-    
+    #print (command)
+
     #Email Section
     if 'send mail' in command:
-       
         send_mail()
    
-    
-
     #Automated Office
     elif 'automated office' in command:
         
@@ -110,19 +113,24 @@ def assistant(command):
                 elif template_option=="cv" or template_option=="resume":
                     from cv_template import cv
                     cv()
+                
             
     #Recognizer
     
     elif 'recognizer' in command:
         #recognize_type=input("Recognizer Type:")
         say("Choose Either Image or Live Stream")
-        recognize_type=my_command()
+        #recognize_type=my_command()
+        recognize_type=input("Type:")
         if recognize_type=="image" or recognize_type=="photo":
             from image import recognize_image
             recognize_image()
+        
         elif recognize_type=="video":
             from video import recognize_video
             recognize_video()
+
+    
 
     #Launch System Application
     elif 'launch' in command:
@@ -132,24 +140,34 @@ def assistant(command):
             appname = reg_ex.group(1)
             launch_application(appname)
             response('I have launched the desired application')
+              
+    elif 'open' in command:
+        website = re.search('open (.*)', command).group(1)
+        webbrowser.open(website)
+        response('I have launched the desired application')
     
-
-    #Open Website        
-    elif 'open' or 'open website'  in command:
-        reg_ex = re.search('open (.+)', command)
-        if reg_ex:
-            domain = reg_ex.group(1)
-            print(domain)
-            url = 'https://www.' + domain
-            webbrowser.open(url)
-            response('The website you have requested has been opened.')
+    elif(command):  
+        #print("Here")
+        #query = input("User > ")
+        query = [spell(w) for w in (command.split())]
+        question = " ".join(query)
+        reply = k.respond(question)
+        question=question.lower()
+        if reply:
+            print("Killer > ", reply)
+            say(reply)
+                    
         else:
-            pass
+            print("Killer > :) ", )
+
+    elif command=='quit':
+        quit()
 
    
 
 while(True):
-    assistant(my_command())
+    command=input("User > ")
+    assistant(command)
 
-#assistant('launch paint ')
+#assistant('hey dude ')
 

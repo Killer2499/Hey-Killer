@@ -136,5 +136,4 @@ def letter():
     document.save(location)
 
 
-letter()
 
