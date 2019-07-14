@@ -4,7 +4,7 @@
 Hey Killer! is a windows virtual assistant is being developed in python.
 
 Progress: Developing State<br><br>
-Areas Covering: Machine Learning,Deep Learning,Image Processing,Natural Language Processing</p>
+Areas Covering: Machine Learning,Deep Learning,Image Processing,Natural Language Processing<,AIML-Chatbots/p>
 
 Features:<br>
 Implemented:
